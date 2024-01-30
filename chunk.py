@@ -65,25 +65,28 @@ class TextChunker(ABC):
         """
         pass
 
-# Ví dụ minh họa sử dụng, có thể thêm các thuộc tính hoặc phương thức cần thiết
-# -----------------------------------------------------------------------------#
-class MyTextChunker(TextChunker):
-    def chunk_text(self, text: str, chunk_size: int) -> list:
-        return [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
-
-    def run(self, path: str):
-        for filename in os.listdir(path):
-            if filename.endswith(".json"):
-                with open(os.path.join(path, filename), 'r') as f:
-                    data = json.load(f)
-                    chunks = self.chunk_text(data['document'], 100)
-                    # Chia documnet thành các chunk
-                    # Lưu chunks vào file .txt và database
-                    # Lưu file JSON để dùng cho Evaluate
+# Ví dụ minh họa định nghĩa sử dụng, có thể thêm các thuộc tính hoặc phương thức cần thiết
+# ----------------------------------------------------------------------------------------#
 
 
 
-chunker = MyTextChunker()
-path = "/path/files"
-# Gọi phương thức run để chia nhỏ văn bản và lưu kết quả
-chunker.run(path)
+if __name__ == '__main__':
+    class MyTextChunker(TextChunker):
+        def chunk_text(self, text: str, chunk_size: int) -> list:
+            return [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
+
+        def run(self, path: str):
+            for filename in os.listdir(path):
+                if filename.endswith(".json"):
+                    with open(os.path.join(path, filename), 'r') as f:
+                        data = json.load(f)
+                        chunks = self.chunk_text(data['document'], 100)
+                        # Chia documnet thành các chunk
+                        # Lưu chunks vào file .txt và database
+                        # Lưu file JSON để dùng cho Evaluate
+
+
+    chunker = MyTextChunker()
+    path = "/path/files"
+    # Gọi phương thức run để chia nhỏ văn bản và lưu kết quả
+    chunker.run(path)

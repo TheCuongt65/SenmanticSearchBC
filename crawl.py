@@ -58,17 +58,23 @@ class DataCrawler(ABC):
 
 # Ví dụ minh họa sử dụng, có thể thêm các thuộc tính hoặc phương thức cần thiết
 # -----------------------------------------------------------------------------#
-class MyDataCrawler(DataCrawler):
-    def fetch(self, url: str):
-        response = requests.get(url)
-        return response.text
+if __name__ == '__main__':
+    class MyDataCrawler(DataCrawler):
+        def fetch(self, url: str):
+            response = requests.get(url)
+            return response.text
 
-    def parse(self, html: str):
-        soup = BeautifulSoup(html, 'html.parser')
-        return data
+        def parse(self, html: str):
+            soup = BeautifulSoup(html, 'html.parser')
+            return data
 
-    def run(self, keywords: list):
-        for keyword in keywords:
-            html = self.fetch(url)
-            data = self.parse(html)
-            # Lưu file JSON dưới dạng như sau
+        def run(self, keywords: list):
+            for keyword in keywords:
+                html = self.fetch(url)
+                data = self.parse(html)
+                # Lưu file JSON dưới dạng như sau
+
+    crawler = MyDataCrawler()
+    keywords = ["từ khóa 1", "từ khóa 2", "từ khóa 3"]
+    # Gọi phương thức run để tìm kiếm và lưu kết quả
+    crawler.run(keywords)

@@ -39,26 +39,28 @@ class SemanticSearchEvaluator(ABC):
         """
 
 
-# Ví dụ minh họa sử dụng, có thể thêm các thuộc tính hoặc phương thức cần thiết
-# -----------------------------------------------------------------------------#
+# Ví dụ minh họa định nghĩa sử dụng, có thể thêm các thuộc tính hoặc phương thức cần thiết
+# ----------------------------------------------------------------------------------------#
 
-class MySemanticSearchEvaluator(SemanticSearchEvaluator):
-    def evaluate(self, query: str, results: list) -> float:
-        # Đây là một hàm đánh giá giả định
-        return len(results) / 100.0
+if __name__ == '__main__':
 
-    def evaluate_all(self, path_queries_results: str) -> float:
-        # Đây là một logic giả định
-        with open(path_queries_results, 'r') as f:
-            data = json.load(f)
-        total_score = 0
-        for query_results in data:
-            query = query_results['query']
-            results = query_results['results']
-            total_score += self.evaluate(query, results)
-        return total_score / len(data)
+    class MySemanticSearchEvaluator(SemanticSearchEvaluator):
+        def evaluate(self, query: str, results: list) -> float:
+            # Đây là một hàm đánh giá giả định
+            return len(results) / 100.0
 
-# Sử dụng lớp MySemanticSearchEvaluator
-evaluator = MySemanticSearchEvaluator()
-score = evaluator.evaluate_all('path_to_your_file.json')
-print(f'The evaluation score is {score}')
+        def evaluate_all(self, path_queries_results: str) -> float:
+            # Đây là một logic giả định
+            with open(path_queries_results, 'r') as f:
+                data = json.load(f)
+            total_score = 0
+            for query_results in data:
+                query = query_results['query']
+                results = query_results['results']
+                total_score += self.evaluate(query, results)
+            return total_score / len(data)
+
+    # Sử dụng lớp MySemanticSearchEvaluator
+    evaluator = MySemanticSearchEvaluator()
+    score = evaluator.evaluate_all('path_to_your_file.json')
+    print(f'The evaluation score is {score}')
